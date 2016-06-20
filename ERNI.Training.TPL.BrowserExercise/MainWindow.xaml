@@ -1,0 +1,48 @@
+﻿<Window x:Class="ERNI.Training.TPL.BrowserExercise.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ERNI.Training.TPL.BrowserExercise"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid Name="rootLayout">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Content="URL:" />
+            <TextBox Grid.Column="1" Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Grid.Column="2" Content="GO" Command="{Binding GoCommand}" />
+            <Button Grid.Column="3" Content="Stop" Command="{Binding StopCommand}" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.Resources>
+                <DataTemplate x:Key="ImageDataTemplate">
+                    <Image Source="{Binding ImageSource}" Width="{Binding Width}" Height="{Binding Height}" />
+                </DataTemplate>
+            </Grid.Resources>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Text="{Binding HtmlContent, Mode=OneWay}" FontFamily="Consolas" IsReadOnly="True"
+                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible" />
+
+            <ListView Grid.Column="1" ItemsSource="{Binding Images}" ItemTemplate="{StaticResource ImageDataTemplate}" />
+        </Grid>
+    </Grid>
+</Window>
